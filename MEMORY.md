@@ -36,9 +36,16 @@
 
 ## Стек и инструменты
 
-> Дописывайте по мере выбора: что используете для frontend, backend, AI, deploy, дизайна. Локальные утилиты на компьютере (например yt-dlp, ffmpeg) — тоже сюда.
+**Установлено 2026-05-05:**
+- **Superpowers** (v5.1.0) — методология разработки с 15 встроенными скиллами
+  - Расположение: `/.claude/plugins/superpowers/`
+  - Скиллы: brainstorming, TDD, code review, debugging, git workflows, parallel agents, plan writing и т.д.
 
-*Пока пусто. Появится по мере появления конкретного стека.*
+**Собственные скиллы** (в `/.claude/skills/`):
+- **content-creator** — контент для блогов и соцсетей
+- **discovery-interview** — интервью для превращения идей в спеки
+- **frontend-design** — production-grade интерфейсы
+- **fullstack-developer** — React, Node.js, БД, API, деплой
 
 ---
 
