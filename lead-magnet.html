@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F2EDE3">
+<title>Как увеличить продажи с помощью ИИ-агентов — чек-лист</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --paper:#F2EDE3;
+  --paper-2:#EAE3D2;
+  --ink:#1A1714;
+  --ink-2:#4A423B;
+  --muted:#7A7165;
+  --hairline:#D6CDB9;
+  --accent:#C8553D;
+  --accent-d:#A6402A;
+  --accent-s:#FBE8E0;
+  --dark:#16130F;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1100px;
+  --pad: clamp(20px, 5vw, 56px);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0.028 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  opacity:0.6;mix-blend-mode:multiply;
+}
+
+.progress{
+  position:fixed;top:0;left:0;height:3px;background:var(--accent);
+  width:0%;z-index:100;transition:width 70ms linear;
+  box-shadow:0 0 10px rgba(200,85,61,0.5);
+}
+
+.top{
+  position:sticky;top:0;z-index:50;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px var(--pad);
+  background:rgba(242,237,227,0.78);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:border-color 220ms;
+}
+.top.scrolled{border-bottom-color:var(--hairline)}
+.brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;letter-spacing:0.01em;color:var(--ink-2)}
+.brand .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 0 3px rgba(200,85,61,0.18)}
+.brand b{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ink)}
+
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink);
+  background:transparent;border:1px solid var(--hairline);
+  padding:9px 14px;border-radius:999px;cursor:pointer;
+  transition:all 180ms;
+}
+.btn-ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-ghost svg{width:14px;height:14px;flex-shrink:0}
+
+main{position:relative;z-index:1}
+section, .cta-soft-wrap{max-width:var(--maxw);margin:0 auto;padding: clamp(64px,10vw,120px) var(--pad);position:relative}
+
+.hero{padding-top:clamp(48px,8vw,96px);padding-bottom:clamp(56px,8vw,96px)}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:600;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:32px;
+}
+.eyebrow::before{content:'';width:24px;height:1px;background:currentColor;opacity:0.6}
+.hero h1{
+  font-family:var(--serif);
+  font-size: clamp(40px, 7.5vw, 88px);
+  font-weight:400;line-height:1.02;letter-spacing:-0.022em;
+  margin:0 0 28px;font-variation-settings:'opsz' 144,'SOFT' 50;
+}
+.hero h1 em{font-style:italic;font-weight:300;color:var(--accent);font-variation-settings:'opsz' 144,'SOFT' 100}
+.hero h1 .quiet{display:block;color:var(--muted);font-size:0.5em;font-weight:300;font-style:italic;margin-top:14px;letter-spacing:-0.01em}
+.lead{font-size:clamp(17px,2vw,21px);line-height:1.55;color:var(--ink-2);max-width:620px;margin:0 0 40px}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:14px 32px;
+  font-size:12px;color:var(--muted);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  border-top:1px solid var(--hairline);padding-top:24px;
+}
+.hero-meta span{display:flex;align-items:center;gap:8px}
+.hero-meta span::before{content:'';width:5px;height:5px;background:var(--accent);border-radius:50%}
+
+section > h2, .cta h2{
+  font-family:var(--serif);
+  font-size: clamp(28px,4.8vw,52px);
+  font-weight:400;line-height:1.08;letter-spacing:-0.02em;
+  margin:0 0 18px;font-variation-settings:'opsz' 96,'SOFT' 50;
+}
+.num{
+  font-family:var(--serif);font-size:0.42em;font-style:italic;color:var(--accent);
+  display:inline-block;margin-right:14px;vertical-align:0.45em;font-weight:400;
+}
+.section-lead{font-size:17px;color:var(--ink-2);max-width:640px;margin:0 0 40px;line-height:1.55}
+
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1px;background:var(--hairline);border:1px solid var(--hairline);border-radius:6px;overflow:hidden;
+}
+.card{background:var(--paper);padding:30px 26px;display:flex;flex-direction:column;gap:10px;transition:background 220ms}
+.card:hover{background:var(--paper-2)}
+.card .ix{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:13px;letter-spacing:0.05em}
+.card h4{font-family:var(--serif);font-size:21px;font-weight:500;margin:0;line-height:1.2;letter-spacing:-0.005em}
+.card p{margin:0;color:var(--ink-2);font-size:15px;line-height:1.55}
+
+.quiz{
+  margin-top:32px;background:rgba(255,253,247,0.55);
+  border:1px solid var(--hairline);border-radius:8px;
+  padding:clamp(24px,4vw,44px);
+}
+.q{padding:24px 0;border-top:1px solid var(--hairline)}
+.q:first-child{border-top:none;padding-top:0}
+.q-num{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:12px;letter-spacing:0.1em;margin-bottom:10px;display:block;font-variation-settings:'opsz' 14}
+.q-text{font-family:var(--serif);font-size:clamp(19px,2.5vw,25px);font-weight:400;line-height:1.3;margin-bottom:18px;letter-spacing:-0.01em}
+.q-opts{display:flex;gap:10px;flex-wrap:wrap}
+.q-opts button{
+  font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);
+  background:transparent;border:1px solid var(--hairline);
+  padding:10px 18px;border-radius:999px;cursor:pointer;transition:all 180ms;
+}
+.q-opts button:hover{border-color:var(--ink)}
+.q-opts button.sel{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.q-opts button.sel.bad{background:var(--accent);border-color:var(--accent)}
+
+.result{
+  display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;
+  padding-top:36px;margin-top:36px;border-top:1px dashed var(--hairline);
+}
+.result[hidden]{display:none}
+.result-num{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(72px,12vw,128px);color:var(--accent);line-height:0.9;
+  font-variation-settings:'opsz' 144,'SOFT' 100;
+}
+.result-headline{font-family:var(--serif);font-size:clamp(20px,3vw,28px);font-weight:400;line-height:1.25;margin-bottom:8px;letter-spacing:-0.01em}
+.result-sub{color:var(--ink-2);font-size:15px;line-height:1.55}
+.link{
+  background:none;border:none;color:var(--accent);font-family:var(--sans);
+  font-size:13px;font-weight:600;cursor:pointer;padding:12px 0 0;
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;
+}
+.link:hover{color:var(--accent-d)}
+
+.accordion{list-style:none;padding:0;margin:32px 0 0;border-top:1px solid var(--hairline)}
+.acc{
+  position:relative;border-bottom:1px solid var(--hairline);
+  display:grid;grid-template-columns:34px 1fr;align-items:start;gap:0 14px;
+  transition:background 220ms;
+}
+.acc:hover{background:rgba(255,255,255,0.32)}
+.acc-check{align-self:center;padding:24px 0 24px 4px;cursor:pointer;display:flex}
+.acc-check input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+.acc-check span{
+  width:22px;height:22px;border:1.5px solid var(--hairline);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;transition:all 180ms;flex-shrink:0;background:var(--paper);
+}
+.acc-check:hover span{border-color:var(--ink-2)}
+.acc-check input:checked + span{background:var(--accent);border-color:var(--accent)}
+.acc-check input:checked + span::after{
+  content:'';width:9px;height:5px;
+  border-left:1.5px solid var(--paper);border-bottom:1.5px solid var(--paper);
+  transform:rotate(-45deg) translate(0px,-1px);
+}
+.acc-head{
+  width:100%;background:transparent;border:none;
+  font-family:var(--sans);text-align:left;padding:24px 60px 24px 0;cursor:pointer;
+  font-size:clamp(17px,2vw,20px);font-weight:600;color:var(--ink);
+  display:flex;align-items:center;gap:18px;position:relative;letter-spacing:-0.005em;
+}
+.acc-step{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:13px;color:var(--accent);letter-spacing:0.05em;flex-shrink:0;
+  font-variation-settings:'opsz' 14;
+}
+.acc-title{flex:1;line-height:1.3}
+.acc-icon{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;border:1px solid var(--hairline);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:300;color:var(--ink);transition:all 260ms cubic-bezier(0.4,0,0.2,1);
+  background:var(--paper);
+}
+.acc.open .acc-icon{transform:translateY(-50%) rotate(45deg);background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.acc-body{grid-column:2;max-height:0;overflow:hidden;transition:max-height 380ms cubic-bezier(0.4,0,0.2,1)}
+.acc.open .acc-body{max-height:1200px}
+.acc-body-inner{padding:0 0 28px 0;color:var(--ink-2);font-size:16px;line-height:1.65}
+.acc-body-inner p{margin:0 0 12px}
+.acc-body-inner p:last-child{margin-bottom:0}
+.acc-body-inner ul{margin:8px 0;padding-left:18px}
+.acc-body-inner li{margin-bottom:6px}
+.acc-body-inner .quote{
+  font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.4;color:var(--ink);
+  padding:18px 22px;background:var(--accent-s);border-radius:4px;margin:18px 0;
+  border-left:2px solid var(--accent);
+  font-variation-settings:'opsz' 36,'SOFT' 100;
+}
+.acc-body-inner .stat{font-weight:700;color:var(--accent)}
+.acc-body-inner b{color:var(--ink);font-weight:700}
+
+.cta-soft-wrap{padding-top:0;padding-bottom:0}
+.cta-soft-inner{
+  border:1px solid var(--hairline);border-radius:8px;
+  padding:clamp(28px,5vw,44px);
+  background:linear-gradient(135deg, var(--paper-2) 0%, var(--paper) 100%);
+  display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+}
+.cta-soft-inner h3{font-family:var(--serif);font-size:clamp(22px,3vw,30px);font-weight:400;line-height:1.2;margin:0 0 6px;letter-spacing:-0.01em}
+.cta-soft-inner p{margin:0;color:var(--ink-2);font-size:15px}
+.cta-soft-arrow{
+  font-family:var(--serif);font-style:italic;font-size:46px;color:var(--accent);
+  font-weight:300;line-height:1;flex-shrink:0;
+}
+
+.thesis-list{
+  list-style:none;padding:0;margin:32px 0;counter-reset:li;
+  display:grid;gap:1px;background:var(--hairline);
+  border:1px solid var(--hairline);border-radius:6px;overflow:hidden;
+}
+.thesis-list li{
+  background:var(--paper);padding:22px 26px;font-size:17px;line-height:1.5;
+  display:flex;gap:18px;align-items:flex-start;transition:background 220ms;
+}
+.thesis-list li:hover{background:var(--paper-2)}
+.thesis-list li::before{
+  content: counter(li, decimal-leading-zero);counter-increment: li;
+  font-family:var(--serif);font-style:italic;color:var(--accent);
+  font-size:14px;font-weight:400;padding-top:3px;min-width:24px;letter-spacing:0.05em;
+}
+
+.cta{
+  background:var(--dark);color:var(--paper);max-width:none;margin:80px 0 0;
+  padding:clamp(72px,12vw,140px) var(--pad);position:relative;overflow:hidden;
+}
+.cta::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(200,85,61,0.32) 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 100%, rgba(200,85,61,0.14) 0%, transparent 50%);
+}
+.cta::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.04 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  mix-blend-mode:overlay;opacity:0.5;
+}
+.cta-inner{max-width:880px;margin:0 auto;position:relative;z-index:1}
+.eyebrow.light{color:rgba(242,237,227,0.55)}
+.cta h2{color:var(--paper);margin:0 0 26px}
+.cta h2 em{font-style:italic;color:var(--accent);font-weight:300}
+.cta p.lead{color:rgba(242,237,227,0.78);max-width:600px;margin-bottom:36px}
+.cta-list{list-style:none;padding:0;margin:0 0 44px;display:flex;flex-wrap:wrap;gap:8px 28px}
+.cta-list li{font-size:13px;color:rgba(242,237,227,0.65);display:flex;align-items:center;gap:8px;padding:6px 0;letter-spacing:0.02em}
+.cta-list li::before{content:'';width:5px;height:5px;background:var(--accent);border-radius:50%}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:14px;
+  background:var(--accent);color:var(--paper);
+  font-family:var(--sans);font-size:17px;font-weight:700;
+  padding:20px 32px;border-radius:999px;text-decoration:none;
+  transition:all 240ms cubic-bezier(0.4,0,0.2,1);position:relative;
+  box-shadow:0 14px 36px -10px rgba(200,85,61,0.55), 0 0 0 1px rgba(255,255,255,0.04) inset;
+  letter-spacing:-0.005em;
+}
+.btn-primary:hover{background:var(--accent-d);transform:translateY(-2px);box-shadow:0 20px 44px -10px rgba(200,85,61,0.65), 0 0 0 1px rgba(255,255,255,0.04) inset}
+.btn-primary .arrow{transition:transform 240ms;font-family:var(--serif);font-weight:300;font-size:22px;line-height:1}
+.btn-primary:hover .arrow{transform:translateX(5px)}
+.cta-foot{margin-top:22px;font-size:13px;color:rgba(242,237,227,0.48);letter-spacing:0.02em}
+
+footer{background:var(--dark);color:rgba(242,237,227,0.4);padding:22px var(--pad);text-align:center;font-size:12px;letter-spacing:0.05em}
+footer p{margin:0}
+footer em{font-family:var(--serif);font-style:italic;color:rgba(242,237,227,0.55)}
+
+@media (max-width: 720px){
+  body{font-size:16px}
+  .cta-soft-inner{flex-direction:column;align-items:flex-start;gap:14px}
+  .cta-soft-arrow{align-self:flex-end}
+  .result{grid-template-columns:1fr;text-align:left;gap:18px}
+  .grid{grid-template-columns:1fr}
+  .acc-head{padding-right:50px;font-size:17px}
+  .hero h1{font-size:clamp(38px,10vw,56px)}
+  .top{padding:12px var(--pad)}
+  .btn-ghost{padding:8px 12px;font-size:12px}
+  .btn-ghost svg{width:13px;height:13px}
+}
+
+@media print{
+  body{background:white;color:black}
+  body::before{display:none}
+  .top, .progress, .btn-ghost, .link, .q-opts, .acc-icon, .cta-soft-wrap{display:none !important}
+  section{padding:24px var(--pad);page-break-inside:avoid;max-width:none}
+  .hero{page-break-after:always}
+  .accordion .acc{page-break-inside:avoid;background:white !important}
+  .acc-body{max-height:none !important;overflow:visible !important}
+  .acc{grid-template-columns:24px 1fr}
+  .acc-check span{border-color:#000 !important;background:white !important}
+  .cta{background:white !important;color:black !important;margin:40px 0 0;page-break-before:always}
+  .cta::before, .cta::after{display:none}
+  .cta h2, .cta .eyebrow.light, .cta p.lead, .cta-list li, .cta-foot{color:black !important}
+  .cta-list li::before, .hero-meta span::before{background:#000 !important}
+  .btn-primary{background:white !important;color:black !important;border:2px solid #000;box-shadow:none !important;font-weight:700}
+  .btn-primary::after{content:' · https://t.me/Natalija71';font-size:12px;font-weight:400}
+  footer{background:white !important;color:#000 !important;border-top:1px solid #000}
+  .quiz{background:white !important;border:1px solid #000}
+  .result[hidden]{display:none}
+  h1, h2, h3, h4, .num, .acc-step, .ix, .q-num, .stat, .accent{color:#000 !important}
+  .acc-body-inner .quote{background:#f4f4f4 !important;border-left-color:#000 !important}
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.fade > *{opacity:0;animation:fadeUp 700ms cubic-bezier(0.2,0.65,0.3,1) forwards}
+.fade > *:nth-child(1){animation-delay:60ms}
+.fade > *:nth-child(2){animation-delay:160ms}
+.fade > *:nth-child(3){animation-delay:260ms}
+.fade > *:nth-child(4){animation-delay:360ms}
+.fade > *:nth-child(5){animation-delay:460ms}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header class="top" id="top">
+  <div class="brand">
+    <span class="dot"></span>
+    <span><b>ИИ</b> для роста продаж · чек-лист</span>
+  </div>
+  <button class="btn-ghost" onclick="window.print()" title="Сохранить как PDF" aria-label="Сохранить как PDF">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="2" y="9" width="20" height="9" rx="2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    Сохранить PDF
+  </button>
+</header>
+
+<main>
+
+<section class="hero fade">
+  <div class="eyebrow">Чек-лист · 7 минут чтения</div>
+  <h1>
+    Как увеличить<br>
+    продажи с&nbsp;помощью <em>ИИ-агентов</em>
+    <span class="quiet">— без технических знаний и&nbsp;найма</span>
+  </h1>
+  <p class="lead">
+    Карта точек роста твоего бизнеса и&nbsp;7&nbsp;готовых решений, которые можно внедрить уже на&nbsp;этой неделе. Без кода, без долгих интеграций, без новых сотрудников.
+  </p>
+  <div class="hero-meta">
+    <span>7 шагов внедрения</span>
+    <span>1 самопроверка</span>
+    <span>Результат за 14 дней</span>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">01</span>Что внутри</h2>
+  <p class="section-lead">Заявки теряются. Менеджеры отвечают медленно. Продажи держатся на людях. Ты платишь рекламе за лиды, которые сгорают в первые часы. Этот чек-лист закрывает четыре главные утечки.</p>
+  <div class="grid">
+    <div class="card">
+      <span class="ix">i</span>
+      <h4>Точки утечки</h4>
+      <p>Поймёшь, где бизнес теряет деньги прямо сейчас — даже при отличной рекламе.</p>
+    </div>
+    <div class="card">
+      <span class="ix">ii</span>
+      <h4>Что отдать ИИ</h4>
+      <p>Чёткий список процессов, которые ИИ-агент сделает быстрее менеджера — и без выходных.</p>
+    </div>
+    <div class="card">
+      <span class="ix">iii</span>
+      <h4>План внедрения</h4>
+      <p>Простые шаги, которые запускаются за 1–3 дня и не требуют разработчика.</p>
+    </div>
+    <div class="card">
+      <span class="ix">iv</span>
+      <h4>Рост за 7–14 дней</h4>
+      <p>Сценарии и цифры: на сколько вырастают конверсия и средний чек в твоей нише.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">02</span>Где твой бизнес теряет деньги</h2>
+  <p class="section-lead">5 вопросов · 60 секунд. Получишь карту утечек и оценку потенциала роста — прямо здесь, без email.</p>
+
+  <div class="quiz" id="quiz">
+    <div class="q">
+      <span class="q-num">01 / 05</span>
+      <div class="q-text">Бывает, что заявка остаётся без ответа дольше 5 минут?</div>
+      <div class="q-opts">
+        <button data-bad="1">Да, бывает</button>
+        <button data-bad="0">Нет, отвечаем мгновенно</button>
+      </div>
+    </div>
+    <div class="q">
+      <span class="q-num">02 / 05</span>
+      <div class="q-text">У тебя настроено автоматическое касание после первого контакта?</div>
+      <div class="q-opts">
+        <button data-bad="0">Да, автокасания есть</button>
+        <button data-bad="1">Нет, пишет только менеджер</button>
+      </div>
+    </div>
+    <div class="q">
+      <span class="q-num">03 / 05</span>
+      <div class="q-text">Возвращаешься к клиентам, которые «думают», через 2–3 дня?</div>
+      <div class="q-opts">
+        <button data-bad="0">Да, всегда</button>
+        <button data-bad="1">Только если вспомним</button>
+      </div>
+    </div>
+    <div class="q">
+      <span class="q-num">04 / 05</span>
+      <div class="q-text">Все заявки собираются в одном месте — в CRM или таблице?</div>
+      <div class="q-opts">
+        <button data-bad="0">Да, всё в одной системе</button>
+        <button data-bad="1">Нет, лиды разбросаны</button>
+      </div>
+    </div>
+    <div class="q">
+      <span class="q-num">05 / 05</span>
+      <div class="q-text">Делаешь повторные касания с теми, кто уже покупал?</div>
+      <div class="q-opts">
+        <button data-bad="0">Да, регулярно</button>
+        <button data-bad="1">Нет, не успеваем</button>
+      </div>
+    </div>
+
+    <div class="result" id="result" hidden>
+      <div class="result-num">≈&thinsp;<span id="lossPct">0</span>%</div>
+      <div>
+        <div class="result-headline">Ты теряешь до <span id="lossPct2">0</span>% потенциальных продаж</div>
+        <div class="result-sub" id="resultText"></div>
+        <button class="link" onclick="resetQuiz()">Пройти заново</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">03</span>Быстрые победы</h2>
+  <p class="section-lead">Эти действия дают эффект уже на этой неделе. Отмечай выполненное — прогресс сохраняется в твоём браузере.</p>
+
+  <ul class="accordion" id="wins">
+    <li class="acc">
+      <label class="acc-check" aria-label="Отметить выполненным"><input type="checkbox" data-id="w1"><span></span></label>
+      <button class="acc-head" type="button">
+        <span class="acc-title">Автоответ на заявки</span>
+        <span class="acc-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p>Даже простой автоответ в WhatsApp или Telegram увеличивает конверсию <span class="stat">на 10–20%</span>. Клиент чувствует внимание в первые секунды — это решает почти всё.</p>
+        <div class="quote">«Спасибо за заявку! В&nbsp;течение 2&nbsp;минут вернусь с&nbsp;деталями.» — этого достаточно для&nbsp;старта.</div>
+      </div></div>
+    </li>
+    <li class="acc">
+      <label class="acc-check"><input type="checkbox" data-id="w2"><span></span></label>
+      <button class="acc-head" type="button">
+        <span class="acc-title">Быстрые ответы на частые вопросы</span>
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p>До <b>80%</b> входящих — про цену, сроки и условия. Подготовь заготовки и включи быстрые ответы в мессенджере:</p>
+        <ul>
+          <li>Цена и пакеты</li>
+          <li>Сроки и этапы работы</li>
+          <li>Условия оплаты и гарантии</li>
+        </ul>
+        <p>Освободишь менеджера от рутины и ускоришь сделку в 2–3 раза.</p>
+      </div></div>
+    </li>
+    <li class="acc">
+      <label class="acc-check"><input type="checkbox" data-id="w3"><span></span></label>
+      <button class="acc-head" type="button">
+        <span class="acc-title">Все заявки — в одном месте</span>
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p>Лиды должны собираться в CRM или хотя бы в Google&nbsp;Sheets. Пока заявки висят в разных мессенджерах, почте и блокноте — ты не управляешь продажами, ты их подбираешь.</p>
+      </div></div>
+    </li>
+    <li class="acc">
+      <label class="acc-check"><input type="checkbox" data-id="w4"><span></span></label>
+      <button class="acc-head" type="button">
+        <span class="acc-title">Закрой «потерянные заявки»</span>
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p>Открой переписки за последнюю неделю и найди:</p>
+        <ul>
+          <li>лидов, которые не получили ответ за&nbsp;5&nbsp;минут</li>
+          <li>тех, кому не сделали второе касание</li>
+          <li>«зависших» после первого сообщения</li>
+        </ul>
+        <p>Каждый такой лид — деньги, которые ты <span class="stat">уже заплатил</span> рекламе. Их можно вернуть одним сообщением.</p>
+      </div></div>
+    </li>
+  </ul>
+</section>
+
+<div class="cta-soft-wrap">
+  <div class="cta-soft-inner">
+    <div>
+      <h3>Уже видишь, где теряешь продажи?</h3>
+      <p>Дочитай — в конце ссылка на бесплатный разбор бизнеса лично.</p>
+    </div>
+    <div class="cta-soft-arrow">↓</div>
+  </div>
+</div>
+
+<section>
+  <h2><span class="num">04</span>Четыре шага к&nbsp;автоматизации</h2>
+  <p class="section-lead">Системная работа за пределами быстрых побед. Каждый шаг — это +15–40% к&nbsp;текущей выручке.</p>
+
+  <ul class="accordion" id="steps">
+    <li class="acc">
+      <label class="acc-check"><input type="checkbox" data-id="s1"><span></span></label>
+      <button class="acc-head" type="button">
+        <span class="acc-step">Шаг 01</span>
+        <span class="acc-title">Найди точки потери продаж</span>
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p>Большинство бизнесов теряют деньги не из-за слабой рекламы, а из-за дырявых процессов. Перед автоматизацией честно ответь:</p>
+        <ul>
+          <li>Сколько заявок остаются без ответа?</li>
+          <li>Сколько клиентов «думают» — и пропадают навсегда?</li>
+          <li>Сколько повторных продаж ты не делаешь?</li>
+        </ul>
+        <p>ИИ-агенты решают именно эти три задачи: <b>не теряют лиды</b>, <b>автоматически догоняют</b> сомневающихся, <b>напоминают</b> о повторной покупке.</p>
+      </div></div>
+    </li>
+    <li class="acc">
+      <label class="acc-check"><input type="checkbox" data-id="s2"><span></span></label>
+      <button class="acc-head" type="button">
+        <span class="acc-step">Шаг 02</span>
+        <span class="acc-title">Автоматизируй обработку заявок</span>
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p>Что делает ИИ-агент с каждой входящей заявкой:</p>
+        <ul>
+          <li>отвечает 24/7 — в выходные, ночью, в праздники</li>
+          <li>уточняет потребности 1–2 вопросами</li>
+          <li>предлагает подходящий пакет</li>
+          <li>передаёт «горячего» клиента менеджеру с готовым контекстом</li>
+        </ul>
+        <div class="quote">— Сколько стоит услуга?<br>— Подскажу за минуту. Какой объём и&nbsp;к&nbsp;какому сроку нужно?</div>
+        <p><span class="stat">Конверсия растёт без увеличения рекламного бюджета.</span> Просто потому что ни один лид больше не остаётся без ответа.</p>
+      </div></div>
+    </li>
+    <li class="acc">
+      <label class="acc-check"><input type="checkbox" data-id="s3"><span></span></label>
+      <button class="acc-head" type="button">
+        <span class="acc-step">Шаг 03</span>
+        <span class="acc-title">Прогревай клиентов автоматически</span>
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p>До 80% клиентов не покупают сразу. ИИ ведёт прогревочную цепочку без участия менеджера:</p>
+        <ul>
+          <li><b>День&nbsp;1</b> — ответ + информация по запросу</li>
+          <li><b>День&nbsp;2</b> — релевантный кейс из твоей ниши</li>
+          <li><b>День&nbsp;3</b> — приглашение на консультацию или мягкий оффер</li>
+        </ul>
+        <p>Простая цепочка из трёх касаний повышает продажи <span class="stat">на 15–40%</span> — без единого нового сотрудника.</p>
+      </div></div>
+    </li>
+    <li class="acc">
+      <label class="acc-check"><input type="checkbox" data-id="s4"><span></span></label>
+      <button class="acc-head" type="button">
+        <span class="acc-step">Шаг 04</span>
+        <span class="acc-title">Увеличь повторные продажи</span>
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p>Большая часть прибыли — это повторные покупки. ИИ помогает:</p>
+        <ul>
+          <li>напомнить о повторной покупке в&nbsp;нужный момент</li>
+          <li>предложить дополнительные услуги по&nbsp;истории клиента</li>
+          <li>вернуть «спящих» клиентов персональным оффером</li>
+        </ul>
+        <div class="quote">«Вы давно у&nbsp;нас не&nbsp;были — собрали персональное предложение на&nbsp;основе вашего последнего заказа.»</div>
+        <p>Даже <span class="stat">+10%</span> возврата клиентов даёт сильный рост чистой прибыли — потому что не&nbsp;требует затрат на&nbsp;рекламу.</p>
+      </div></div>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">05</span>Главное за&nbsp;30&nbsp;секунд</h2>
+  <p class="section-lead">Если запомнишь только это — уже окупишь чтение.</p>
+
+  <ul class="thesis-list" id="thesis">
+    <li>Продажи растут не от рекламы, а от автоматизации процессов вокруг неё.</li>
+    <li>ИИ-агент — это не «технология», а сотрудник 24/7 без выходных и человеческого фактора.</li>
+    <li>Заявка без ответа за первые 5 минут = минус 10–20% к конверсии.</li>
+    <li>Прогревочная цепочка из 3 касаний поднимает продажи на 15–40%.</li>
+    <li>Возврат «спящих» клиентов даёт прибыль без затрат на рекламу.</li>
+  </ul>
+
+  <button class="btn-ghost" id="copyBtn" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+    <span id="copyTxt">Скопировать ключевые тезисы</span>
+  </button>
+</section>
+
+<section class="cta">
+  <div class="cta-inner">
+    <div class="eyebrow light">Следующий шаг</div>
+    <h2>Получи разбор<br>своего <em>бизнеса</em></h2>
+    <p class="lead">За 30 минут найдём точки утечки продаж в твоей нише и покажем, какие ИИ-агенты дадут максимум именно тебе. Бесплатно, без презентаций — только конкретика.</p>
+    <ul class="cta-list">
+      <li>Анализ твоих процессов</li>
+      <li>Карта потерь продаж</li>
+      <li>План внедрения ИИ</li>
+    </ul>
+    <a class="btn-primary" href="https://t.me/Natalija71" target="_blank" rel="noopener">
+      Написать «Хочу автоматизацию»
+      <span class="arrow" aria-hidden="true">→</span>
+    </a>
+    <div class="cta-foot">Telegram · @Natalija71 · отвечаем обычно в течение часа</div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 · ИИ-агенты для бизнеса · сделано <em>с заботой о росте</em></p>
+</footer>
+
+</main>
+
+<script>
+(function(){
+  var progress = document.getElementById('progress');
+  var topBar = document.getElementById('top');
+  function updateProgress(){
+    var h = document.documentElement, b = document.body;
+    var max = (h.scrollHeight || b.scrollHeight) - h.clientHeight;
+    var st = h.scrollTop || b.scrollTop;
+    var pct = max > 0 ? (st / max) * 100 : 0;
+    progress.style.width = pct + '%';
+    topBar.classList.toggle('scrolled', st > 8);
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  document.querySelectorAll('.acc-head').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.closest('.acc').classList.toggle('open');
+    });
+  });
+  document.querySelectorAll('.acc-check').forEach(function(l){
+    l.addEventListener('click', function(e){ e.stopPropagation(); });
+  });
+
+  var STORE = 'jarvis-leadmagnet-v1';
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch(e){}
+  document.querySelectorAll('input[type="checkbox"][data-id]').forEach(function(cb){
+    var id = cb.dataset.id;
+    if (state[id]) cb.checked = true;
+    cb.addEventListener('change', function(){
+      state[id] = cb.checked;
+      try { localStorage.setItem(STORE, JSON.stringify(state)); } catch(e){}
+    });
+  });
+
+  var answers = {};
+  document.querySelectorAll('#quiz .q').forEach(function(qEl, qi){
+    qEl.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        answers[qi] = parseInt(b.dataset.bad, 10);
+        qEl.querySelectorAll('button').forEach(function(x){ x.classList.remove('sel','bad'); });
+        b.classList.add('sel');
+        if (answers[qi] === 1) b.classList.add('bad');
+        if (Object.keys(answers).length === 5) renderResult();
+      });
+    });
+  });
+  function renderResult(){
+    var bad = 0;
+    Object.keys(answers).forEach(function(k){ bad += answers[k]; });
+    var pct = bad * 15;
+    document.getElementById('lossPct').textContent = pct;
+    document.getElementById('lossPct2').textContent = pct;
+    var r = document.getElementById('result');
+    r.hidden = false;
+    var txt = document.getElementById('resultText');
+    if (bad === 0) {
+      txt.textContent = 'Процессы выстроены отлично. ИИ-агенты добавят к этому масштаб — обработают любой объём заявок без потери качества.';
+    } else if (bad <= 2) {
+      txt.textContent = 'Фундамент крепкий, но есть утечки. ИИ-агент закроет их за 1–3 дня и поднимет конверсию на 15–25%.';
+    } else {
+      txt.textContent = 'Утечек много — значит, потенциал роста огромный. Дочитай чек-лист: в конце ссылка на разбор бизнеса лично.';
+    }
+    setTimeout(function(){ r.scrollIntoView({behavior:'smooth', block:'center'}); }, 80);
+  }
+  window.resetQuiz = function(){
+    answers = {};
+    document.querySelectorAll('#quiz .q button').forEach(function(b){ b.classList.remove('sel','bad'); });
+    document.getElementById('result').hidden = true;
+    document.getElementById('quiz').scrollIntoView({behavior:'smooth', block:'start'});
+  };
+
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var lis = document.querySelectorAll('#thesis li');
+    var text = 'Главное о росте продаж через ИИ-агентов:\n\n';
+    lis.forEach(function(li, i){
+      text += (i+1) + '. ' + li.textContent.trim() + '\n';
+    });
+    text += '\nРазбор бизнеса лично: https://t.me/Natalija71';
+    var done = function(){
+      var t = document.getElementById('copyTxt');
+      var orig = t.textContent;
+      t.textContent = 'Скопировано ✓';
+      setTimeout(function(){ t.textContent = orig; }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
+    } else {
+      fallbackCopy(text); done();
+    }
+  });
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta);
+  }
+})();
+</script>
+</body>
+</html>

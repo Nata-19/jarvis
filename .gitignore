@@ -1,0 +1,12 @@
+# Сторонние плагины Claude — клонируются локально, в репо не нужны
+.claude/plugins/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Логи и временные файлы
+*.log
+*.tmp
